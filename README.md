@@ -1,7 +1,7 @@
 # NRestful
 C# library to consume a Restful API from .NET
 
-Sample:
+**Usage:**
 
 Instantiate a client and pass the URL of the Resfult Api as a parameter and send a "GET" request.
 ```cs
