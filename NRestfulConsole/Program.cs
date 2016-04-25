@@ -23,13 +23,17 @@ namespace NRestfulConsole {
 
             var client = new Client(Url);
 
-            //Send a GET request:
+            //Send a POST request:
             var response = client.RequestAsync<string>(new Request {
                 EndPoint = new EndPoint {
-                    Method = Method.GET,
-                    Uri = "sample/{id}"
+                    Method = Method.POST,
+                    Uri = "sample/"
                 },
-                UrlSegment = { { "id", "5" } }
+                Data = JsonHelper.ToJson(new {
+                    firstName = "Walter",
+                    lastName = "Soto",
+                    Email = "email@email.net"
+                })
             });
 
             var result = await response;
