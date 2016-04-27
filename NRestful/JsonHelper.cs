@@ -11,7 +11,5 @@ namespace NRestful {
         public static T FromJson<T>(string txt) {
             return JsonConvert.DeserializeObject<T>(txt);
         }
-
-
     }
 }
