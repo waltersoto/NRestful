@@ -21,11 +21,11 @@ namespace NRestful {
             Content = JsonHelper.FromJson<T>(content);
         }
 
-
         public T Content { set; get; }
         public bool Success { set; get; }
         public int Status { set; get; }
         public string Description { set; get; }
+
     }
 
 }
