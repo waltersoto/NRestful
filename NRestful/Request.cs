@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using NRestful.Interfaces;
 
 namespace NRestful {
     public class Request : IRequest {

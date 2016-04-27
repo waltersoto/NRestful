@@ -1,7 +1,6 @@
 ﻿
-namespace NRestful {
+namespace NRestful.Interfaces {
     public interface IEndPoint {
-
         string Name { set; get; }
         string Uri { set; get; }
         Method Method { set; get; }

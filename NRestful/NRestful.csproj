@@ -48,10 +48,10 @@
     <Compile Include="Request.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="EndPoint.cs" />
-    <Compile Include="IClient.cs" />
-    <Compile Include="IEndPoint.cs" />
-    <Compile Include="IRequest.cs" />
-    <Compile Include="IResponse.cs" />
+    <Compile Include="Interfaces\IClient.cs" />
+    <Compile Include="Interfaces\IEndPoint.cs" />
+    <Compile Include="Interfaces\IRequest.cs" />
+    <Compile Include="Interfaces\IResponse.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="PatchAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

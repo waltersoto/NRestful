@@ -1,4 +1,5 @@
 ﻿using System;
+using NRestful.Interfaces;
 
 namespace NRestful {
     public class Response<T> : IResponse<T> {

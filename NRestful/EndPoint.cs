@@ -1,4 +1,6 @@
 ﻿
+using NRestful.Interfaces;
+
 namespace NRestful {
     public class EndPoint : IEndPoint {
         public string Name { get; set; }

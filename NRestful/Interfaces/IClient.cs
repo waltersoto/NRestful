@@ -1,8 +1,7 @@
 ﻿
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace NRestful {
+namespace NRestful.Interfaces {
     public interface IClient {
         Task<IResponse<TResponse>> RequestAsync<TResponse>(IRequest request);
         Task<IResponse<TResponse>> GetAsync<TResponse>(string uri);

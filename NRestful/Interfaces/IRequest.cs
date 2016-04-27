@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NRestful {
+namespace NRestful.Interfaces {
     public interface IRequest {
         string Data { set; get; }
         IDictionary<string, string> Parameters { set; get; }
