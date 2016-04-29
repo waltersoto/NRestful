@@ -111,7 +111,7 @@ namespace NRestful {
 
                 if (request.Headers != null && request.Headers.Count > 0) {
 
-                    foreach (var header in request.Headers.Where(m => m.Key.Equals("MediaType", StringComparison.InvariantCultureIgnoreCase))) {
+                    foreach (var header in request.Headers.Where(m => m.Key.Equals("MediaType", StringComparison.OrdinalIgnoreCase))) {
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(header.Value));
                     }

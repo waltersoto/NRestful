@@ -10,6 +10,7 @@ namespace NRestfulConsole {
 
             RequestTest();
 
+
             Console.ReadLine();
 
         }
@@ -24,21 +25,18 @@ namespace NRestfulConsole {
             var client = new Client(Url);
 
             //Send a POST request:
-            var response = client.RequestAsync<string>(new Request {
+            var response = client.RequestAsync<User>(new Request {
                 EndPoint = new EndPoint {
-                    Method = Method.POST,
-                    Uri = "sample/"
-                },
-                Data = JsonHelper.ToJson(new {
-                    firstName = "Walter",
-                    lastName = "Soto",
-                    Email = "email@email.net"
-                })
+                    Method = Method.GET,
+                    Uri = "sample/account/1"
+                }
             });
 
             var result = await response;
 
-            Console.WriteLine(result.Content);
+            Console.WriteLine("{0} {1} ({2})", result.Content.FirstName,
+                                            result.Content.LastName,
+                                            result.Content.Email);
 
             Console.ReadLine();
 
@@ -47,10 +45,10 @@ namespace NRestfulConsole {
 
     }
 
-    public class Login {
+    public class User {
         public string Email { set; get; }
-        public string Password { set; get; }
-        public bool Persist { set; get; }
+        public string FirstName { set; get; }
+        public string LastName { set; get; }
     }
     public class ServiceEvent {
         public string ID { get; set; }

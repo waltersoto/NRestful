@@ -11,9 +11,7 @@ namespace NRestful {
             Success = success;
             if (!Success) return;
 
-            if (typeof(T) == typeof(string)
-                || typeof(T) == typeof(decimal)
-                || typeof(T).IsPrimitive) {
+            if (typeof(T).IsPrimitive()) {
                 Content = (T)Convert.ChangeType(content, typeof(T));
                 return;
             }
