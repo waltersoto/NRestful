@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NRestful</id>
+    <version>1.0.0</version>
+    <title>NRestful</title>
+    <authors>Walter M. Soto Reyes</authors>
+    <owners>Walter M. Soto</owners>
+    <licenseUrl>https://github.com/waltersoto/NRestful/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/waltersoto/NRestful</projectUrl> 
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A C# library to consume a Restful API from .NET</description> 
+    <copyright>Walter M. Soto, Copyright 2016</copyright>
+    <tags>WebApi,Rest,Rest Client</tags>
+  </metadata>
+</package>
