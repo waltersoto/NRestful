@@ -17,7 +17,7 @@ namespace NRestful {
             if (url == null) return;
 
             serviceUrl = url.TrimEnd(@"\"[0])
-                                   .TrimEnd("/"[0]);
+                            .TrimEnd("/"[0]);
         }
 
         private static string UrlWithSegments(string url, IDictionary<string, string> segments) {

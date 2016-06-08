@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NRestful {
     public static class PrimitiveExtension {
@@ -30,7 +27,7 @@ namespace NRestful {
                               typeof (DateTimeOffset),
                               typeof (TimeSpan),
                           };
-            var tt = types.Any(x => t == x);
+
             return types.Any(x => t == x);
 
         }
