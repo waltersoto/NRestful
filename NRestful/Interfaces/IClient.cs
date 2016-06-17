@@ -9,7 +9,7 @@ namespace NRestful.Interfaces {
         Task<IResponse<TResponse>> PutAsync<TResponse>(string uri, string data);
         Task<IResponse<TResponse>> PatchAsync<TResponse>(string uri, string data);
         Task<IResponse<TResponse>> DeleteAsync<TResponse>(string uri);
-
+        string ServiceUrl { set; get; }
 
     }
 }

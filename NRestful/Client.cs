@@ -10,13 +10,11 @@ using NRestful.Interfaces;
 namespace NRestful {
     public class Client : IClient {
 
-        private static string serviceUrl;
-
         public Client(string url) {
 
             if (url == null) return;
 
-            serviceUrl = url.TrimEnd(@"\"[0])
+            ServiceUrl = url.TrimEnd(@"\"[0])
                             .TrimEnd("/"[0]);
         }
 
@@ -63,6 +61,8 @@ namespace NRestful {
                 }
             });
         }
+
+        public string ServiceUrl { get; set; }
 
         public Task<IResponse<TResponse>> PostAsync<TResponse>(string uri, string data) {
             return RequestAsync<TResponse>(new Request {
@@ -171,7 +171,7 @@ namespace NRestful {
             return response;
         }
 
-        private static string FormatUrl(string endPoint, IDictionary<string, string> segments) {
+        private string FormatUrl(string endPoint, IDictionary<string, string> segments) {
             endPoint = endPoint.TrimStart("/"[0])
                                .TrimStart(@"\"[0]);
             if (segments != null && segments.Count > 0) {
@@ -180,7 +180,7 @@ namespace NRestful {
                                     current.Replace($"{{{val.Key}}}", val.Value));
             }
 
-            return $"{serviceUrl}/{endPoint}";
+            return $"{ServiceUrl}/{endPoint}";
         }
 
     }
