@@ -20,7 +20,7 @@ namespace NRestfulConsole {
             /***************
              * WebApi URL:
              ***************/
-            const string Url = "http://localhost:3034/api/";
+            const string Url = "http://localhost:34958/api/";
 
             var client = new Client(Url);
 
@@ -28,7 +28,7 @@ namespace NRestfulConsole {
             var response = client.RequestAsync<User>(new Request {
                 EndPoint = new EndPoint {
                     Method = Method.GET,
-                    Uri = "sample/account/1"
+                    Uri = "sample/1"
                 }
             });
 

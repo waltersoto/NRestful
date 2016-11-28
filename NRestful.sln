@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NRestful", "NRestful\NRestful.csproj", "{340A7915-BD3A-4530-98DB-B554D8C63C81}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NRestfulConsole", "NRestfulConsole\NRestfulConsole.csproj", "{081D9243-0828-425C-BD05-90717536240D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleWebApi", "SampleWebApi", "{771CD142-A81B-4366-8FD5-A62D5EA6DB82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NRestfulSampleWebApi", "NRestfulSampleWebApi\NRestfulSampleWebApi.csproj", "{51E20A8D-357C-448C-B6B3-5F83EB84AF54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +25,15 @@ Global
 		{081D9243-0828-425C-BD05-90717536240D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{081D9243-0828-425C-BD05-90717536240D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{081D9243-0828-425C-BD05-90717536240D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51E20A8D-357C-448C-B6B3-5F83EB84AF54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51E20A8D-357C-448C-B6B3-5F83EB84AF54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51E20A8D-357C-448C-B6B3-5F83EB84AF54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51E20A8D-357C-448C-B6B3-5F83EB84AF54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{51E20A8D-357C-448C-B6B3-5F83EB84AF54} = {771CD142-A81B-4366-8FD5-A62D5EA6DB82}
 	EndGlobalSection
 EndGlobal
