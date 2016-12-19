@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 namespace NRestful.Interfaces {
     public interface IClient {
         Task<IResponse<TResponse>> RequestAsync<TResponse>(IRequest request);
+        Task<IResponse<TResponse>> RequestAsync<TResponse, TRequestData>(IRequest<TRequestData> request);
         Task<IResponse<TResponse>> GetAsync<TResponse>(string uri);
         Task<IResponse<TResponse>> PostAsync<TResponse>(string uri, string data);
         Task<IResponse<TResponse>> PutAsync<TResponse>(string uri, string data);

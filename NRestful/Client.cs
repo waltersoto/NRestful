@@ -45,7 +45,7 @@ namespace NRestful {
         }
 
         public async Task<IResponse<TResponse>> GetAsync<TResponse>(string uri) {
-            return await RequestAsync<TResponse>(new Request {
+            return await RequestAsync<TResponse, string>(new Request<string> {
                 EndPoint = new EndPoint {
                     Method = Method.GET,
                     Uri = uri
@@ -54,7 +54,7 @@ namespace NRestful {
         }
 
         public async Task<IResponse<TResponse>> DeleteAsync<TResponse>(string uri) {
-            return await RequestAsync<TResponse>(new Request {
+            return await RequestAsync<TResponse, string>(new Request<string> {
                 EndPoint = new EndPoint {
                     Method = Method.DELETE,
                     Uri = uri
@@ -65,7 +65,7 @@ namespace NRestful {
         public string ServiceUrl { get; set; }
 
         public Task<IResponse<TResponse>> PostAsync<TResponse>(string uri, string data) {
-            return RequestAsync<TResponse>(new Request {
+            return RequestAsync<TResponse, string>(new Request<string> {
                 Data = data,
                 EndPoint = new EndPoint {
                     Method = Method.POST,
@@ -75,7 +75,7 @@ namespace NRestful {
         }
 
         public Task<IResponse<TResponse>> PutAsync<TResponse>(string uri, string data) {
-            return RequestAsync<TResponse>(new Request {
+            return RequestAsync<TResponse, string>(new Request<string> {
                 Data = data,
                 EndPoint = new EndPoint {
                     Method = Method.PUT,
@@ -85,7 +85,7 @@ namespace NRestful {
         }
 
         public Task<IResponse<TResponse>> PatchAsync<TResponse>(string uri, string data) {
-            return RequestAsync<TResponse>(new Request {
+            return RequestAsync<TResponse, string>(new Request<string> {
                 Data = data,
                 EndPoint = new EndPoint {
                     Method = Method.PATCH,
@@ -93,17 +93,42 @@ namespace NRestful {
                 }
             });
         }
-
-        public async Task<IResponse<TResponse>> RequestAsync<TResponse>(IRequest request) {
+        public Task<IResponse<TResponse>> RequestAsync<TResponse>(IRequest request) {
+            return RequestAsync<TResponse, string>(new Request<string> {
+                Data = request.Data,
+                EndPoint = request.EndPoint,
+                Headers = request.Headers,
+                Parameters = request.Parameters,
+                UrlSegment = request.UrlSegment
+            });
+        }
+        public async Task<IResponse<TResponse>> RequestAsync<TResponse, TRequestData>(IRequest<TRequestData> request) {
 
             var response = new Response<TResponse>();
             if (request?.EndPoint == null) return response;
             using (var client = new HttpClient()) {
 
-                var content = new StringContent(
-                    request.Data ?? "",
-                    Encoding.UTF8,
-                    "application/json");
+                ByteArrayContent content = new StringContent(string.Empty);
+                switch (typeof(TRequestData).FullName) {
+                    case "System.String":
+                        content = new StringContent(
+                            request.Data as string ?? "",
+                            Encoding.UTF8,
+                            "application/json");
+                        break;
+                    case "System.Byte[]": {
+                            var data = request.Data as byte[];
+                            if (data != null) {
+                                content = new ByteArrayContent(data, 0, data.Length);
+                            }
+                        }
+                        break;
+                    default: {
+                            var data = request.Data.ObjectToSerializedByteArray();
+                            content = data != null ? new ByteArrayContent(data, 0, data.Length) : new StringContent(string.Empty);
+                        }
+                        break;
+                }
 
                 var url = FormatUrl(request.EndPoint.Uri, request.UrlSegment);
 
@@ -115,7 +140,6 @@ namespace NRestful {
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(header.Value));
                     }
-
                 }
 
                 var responseString = "";
@@ -123,7 +147,6 @@ namespace NRestful {
                 if (request.UrlSegment != null && request.UrlSegment.Any()) {
                     url = UrlWithSegments(url, request.UrlSegment);
                 }
-
                 if (request.Parameters != null && request.Parameters.Any()) {
                     url = UrlWithParameters(url, request.Parameters);
                 }

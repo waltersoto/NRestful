@@ -33,7 +33,7 @@ namespace NRestfulConsole {
             });
 
             var result = await response;
-
+            if (result?.Content == null) return;
             Console.WriteLine("{0} {1} ({2})", result.Content.FirstName,
                                             result.Content.LastName,
                                             result.Content.Email);
