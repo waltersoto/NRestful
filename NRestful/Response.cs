@@ -19,6 +19,12 @@ namespace NRestful {
             Content = JsonHelper.FromJson<T>(content);
         }
 
+        public Response(byte[] content, bool success) {
+            Success = success;
+            if (!Success) return;
+            Content = (T)Convert.ChangeType(content, typeof(T));
+        }
+
         public T Content { set; get; }
         public bool Success { set; get; }
         public int Status { set; get; }

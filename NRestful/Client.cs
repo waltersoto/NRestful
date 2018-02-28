@@ -105,6 +105,8 @@ namespace NRestful {
         public async Task<IResponse<TResponse>> RequestAsync<TResponse, TRequestData>(IRequest<TRequestData> request) {
 
             var response = new Response<TResponse>();
+            var isByteArray = typeof(TResponse) == typeof(byte[]);
+
             if (request?.EndPoint == null) return response;
             using (var client = new HttpClient()) {
 
@@ -143,6 +145,7 @@ namespace NRestful {
                 }
 
                 var responseString = "";
+                byte[] responseAsBytes = null;
 
                 if (request.UrlSegment != null && request.UrlSegment.Any()) {
                     url = UrlWithSegments(url, request.UrlSegment);
@@ -176,18 +179,28 @@ namespace NRestful {
                 var successResult = false;
 
                 if (httpResponse != null) {
-                    responseString = await httpResponse.Content.ReadAsStringAsync();
+                    if (isByteArray) {
+                        responseAsBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    } else {
+                        responseString = await httpResponse.Content.ReadAsStringAsync();
+                    }
                     statusCode = (int)httpResponse.StatusCode;
                     statusDescription = httpResponse.ReasonPhrase;
                     successResult = httpResponse.IsSuccessStatusCode;
                 }
 
-                if (!string.IsNullOrEmpty(responseString)) {
-                    response = new Response<TResponse>(responseString, successResult) {
-                        Status = statusCode,
-                        Description = statusDescription
-                    };
+                if (isByteArray) {
+                    if (responseAsBytes != null) {
+                        response = new Response<TResponse>(responseAsBytes, successResult);
+                    }
+                } else {
+                    if (!string.IsNullOrEmpty(responseString)) {
+                        response = new Response<TResponse>(responseString, successResult);
+                    }
                 }
+
+                response.Status = statusCode;
+                response.Description = statusDescription;
 
             }
 
