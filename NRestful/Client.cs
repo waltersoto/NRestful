@@ -137,10 +137,8 @@ namespace NRestful {
                 HttpResponseMessage httpResponse;
 
                 if (request.Headers != null && request.Headers.Count > 0) {
-
-                    foreach (var header in request.Headers.Where(m => m.Key.Equals("MediaType", StringComparison.OrdinalIgnoreCase))) {
-                        client.DefaultRequestHeaders.Accept.Clear();
-                        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(header.Value));
+                    foreach (var header in request.Headers) {
+                        client.DefaultRequestHeaders.Add(header.Key, header.Value);
                     }
                 }
 
